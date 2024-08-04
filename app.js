@@ -67,8 +67,11 @@ app.get('/people', async (req, res) => {
   }
 });
 
+const DB_CONTAINER_NAME = "mongodb";
+
 mongoose.connect(
-  "mongodb://host.docker.internal:27017/swfavorites",
+  // container name works here because they're in the same docker network
+  `mongodb://${DB_CONTAINER_NAME}:27017/swfavorites`,
   { useNewUrlParser: true },
   (err) => {
     if (err) {
